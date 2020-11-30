@@ -14,6 +14,7 @@ namespace gameOfLife
         public int[][] Step()
         {
             grid[1][1] = 0;
+            grid[1][2] = 0;
             return grid;
         }
 

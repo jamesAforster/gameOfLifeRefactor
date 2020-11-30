@@ -40,7 +40,6 @@ namespace gameOfLifeTests
             Console.WriteLine("A live cell with no neighbours will die");
             int[][] expectedGrid = getEmptyGrid();
             int[][] initialGrid = getEmptyGrid();
-            expectedGrid[1][1] = 0;
             initialGrid[1][1] = 1;
 
             Game game = new Game(initialGrid);
@@ -52,6 +51,26 @@ namespace gameOfLifeTests
             CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
             CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
         }
+
+        [TestMethod]
+        public void TestMethod4()
+        {
+            Console.WriteLine("A live cell with 1 neighbour will die");
+            int[][] expectedGrid = getEmptyGrid();
+            int[][] initialGrid = getEmptyGrid();
+            initialGrid[1][1] = 1;
+            initialGrid[1][2] = 1;
+
+            Game game = new Game(initialGrid);
+            int[][] actualGrid = game.grid;
+            game.Step();
+
+            CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
+        }
+
 
         public int[][] getEmptyGrid()
         {
