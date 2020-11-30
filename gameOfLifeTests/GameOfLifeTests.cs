@@ -1,13 +1,27 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using gameOfLife;
 
 namespace gameOfLifeTests
 {
     [TestClass]
-    public class UnitTest1
+    public class GameOfLifeTests
     {
         [TestMethod]
         public void TestMethod1()
         {
+            int[][] expectedGrid = new int[4][];
+            expectedGrid[0] = new int[] { 0, 0, 0, 0 };
+            expectedGrid[1] = new int[] { 0, 0, 0, 0 };
+            expectedGrid[2] = new int[] { 0, 0, 0, 0 };
+            expectedGrid[3] = new int[] { 0, 0, 0, 0 };
+
+
+            Game game = new Game();
+            int[][] gameGrid = game.Grid();
+            CollectionAssert.AreEqual(expectedGrid[0], gameGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], gameGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], gameGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], gameGrid[3]);
         }
     }
 }
