@@ -18,5 +18,10 @@ namespace gameOfLife
             grid[3] = new int[] { 0, 0, 0, 0 };
             return grid;
         }
+
+        public int[][] Step()
+        {
+            return Grid();
+        }
     }
 }
