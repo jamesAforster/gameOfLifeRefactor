@@ -92,6 +92,28 @@ namespace gameOfLifeTests
             CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
         }
 
+        [TestMethod]
+        public void TestMethod6()
+        {
+            Console.WriteLine("A live cell with 2 neighbours on different rows will live");
+            int[][] expectedGrid = getEmptyGrid();
+            expectedGrid[0][1] = 0;
+            expectedGrid[1][1] = 1;
+            expectedGrid[2][1] = 0;
+
+            int[][] initialGrid = getEmptyGrid();
+            initialGrid[0][1] = 1;
+            initialGrid[1][1] = 1;
+            initialGrid[2][1] = 1;
+
+            Game game = new Game(initialGrid);
+            int[][] actualGrid = game.Step();
+
+            CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
+        }
 
         public int[][] getEmptyGrid()
         {

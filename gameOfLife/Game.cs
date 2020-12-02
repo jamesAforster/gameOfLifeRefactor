@@ -42,7 +42,14 @@ namespace gameOfLife
                         {
                             count += 1;
                         }
-                        Console.WriteLine(count);
+                        if (grid[rowIndex - 1][elementIndex] == 1)
+                        {
+                            count += 1;
+                        }
+                        if (grid[rowIndex + 1][elementIndex] == 1)
+                        {
+                            count += 1;
+                        }
                     }
                     catch(IndexOutOfRangeException)
                     {
@@ -61,13 +68,13 @@ namespace gameOfLife
                 }
                 rowIndex++;
             }
-            foreach (int[] row in returnGrid)
-            {
-                foreach (int i in row)
-                {
-                    Console.WriteLine(i);
-                }
-            }
+            //foreach (int[] row in returnGrid)
+            //{
+            //    foreach (int i in row)
+            //    {
+            //        Console.WriteLine(i);
+            //    }
+            //}
 
             return returnGrid;
         }
