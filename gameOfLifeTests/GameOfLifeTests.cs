@@ -74,9 +74,10 @@ namespace gameOfLifeTests
         {
             Console.WriteLine("A live cell with 2 neighbours on the same row will live");
             int[][] expectedGrid = getEmptyGrid();
-            expectedGrid[1][1] = 0;
+            expectedGrid[0][2] = 1;
             expectedGrid[1][2] = 1;
-            expectedGrid[1][3] = 0;
+            expectedGrid[2][2] = 1;
+
 
             int[][] initialGrid = getEmptyGrid();
             initialGrid[1][1] = 1;
@@ -85,10 +86,13 @@ namespace gameOfLifeTests
 
             Game game = new Game(initialGrid);
             int[][] actualGrid = game.Step();
-
+            Console.WriteLine("Row index 0: ");
             CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            Console.WriteLine("Row index 1: ");
             CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            Console.WriteLine("Row index 2: ");
             CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            Console.WriteLine("Row index 3: ");
             CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
         }
 
@@ -97,9 +101,9 @@ namespace gameOfLifeTests
         {
             Console.WriteLine("A live cell with 2 neighbours on different rows will live");
             int[][] expectedGrid = getEmptyGrid();
-            expectedGrid[0][1] = 0;
+            expectedGrid[1][0] = 1;
             expectedGrid[1][1] = 1;
-            expectedGrid[2][1] = 0;
+            expectedGrid[1][2] = 1;
 
             int[][] initialGrid = getEmptyGrid();
             initialGrid[0][1] = 1;
@@ -114,6 +118,106 @@ namespace gameOfLifeTests
             CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
             CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
         }
+
+        [TestMethod]
+        public void TestMethod7()
+        {
+            Console.WriteLine("A live cell with 1 neighbour on the row above and 1 diagonal neighbour on the row below will live");
+            int[][] expectedGrid = getEmptyGrid();
+            expectedGrid[1][1] = 1;
+            expectedGrid[1][2] = 1;
+
+
+            int[][] initialGrid = getEmptyGrid();
+            initialGrid[0][1] = 1;
+            initialGrid[1][1] = 1;
+            initialGrid[2][2] = 1;
+
+            Game game = new Game(initialGrid);
+            int[][] actualGrid = game.Step();
+
+            CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
+        }
+
+        [TestMethod]
+        public void TestMethod8()
+        {
+            Console.WriteLine("A live cell with 2 diagonal neighbours will live");
+            int[][] expectedGrid = getEmptyGrid();
+            expectedGrid[2][2] = 1;
+
+            int[][] initialGrid = getEmptyGrid();
+            initialGrid[3][1] = 1;
+            initialGrid[2][2] = 1;
+            initialGrid[1][3] = 1;
+
+            Game game = new Game(initialGrid);
+            int[][] actualGrid = game.Step();
+            CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
+        }
+
+        [TestMethod]
+        public void TestMethod9()
+        {
+            Console.WriteLine("A live cell with more than 3 neighbours will die");
+            int[][] expectedGrid = getEmptyGrid();
+            expectedGrid[1][2] = 1;
+            expectedGrid[1][3] = 1;
+            expectedGrid[2][1] = 1;
+            expectedGrid[3][2] = 1;
+            expectedGrid[3][3] = 1;
+
+            int[][] initialGrid = getEmptyGrid();
+            initialGrid[1][2] = 1;
+            initialGrid[1][3] = 1;
+            initialGrid[2][2] = 1;
+            initialGrid[2][3] = 1;
+            initialGrid[3][2] = 1;
+
+            Game game = new Game(initialGrid);
+            int[][] actualGrid = game.Step();
+
+            foreach (int[] row in  actualGrid)
+            {
+                foreach (int i in row)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+            CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
+        }
+
+        [TestMethod]
+        public void TestMethod10()
+        {
+            Console.WriteLine("A dead cell with more than 3 neighbours will become alive");
+            int[][] expectedGrid = getEmptyGrid();
+            expectedGrid[2][2] = 1;
+
+            int[][] initialGrid = getEmptyGrid();
+            initialGrid[1][2] = 1;
+            initialGrid[2][3] = 1;
+            initialGrid[3][1] = 1;
+
+            Game game = new Game(initialGrid);
+            int[][] actualGrid = game.Step();
+
+            CollectionAssert.AreEqual(expectedGrid[0], actualGrid[0]);
+            CollectionAssert.AreEqual(expectedGrid[1], actualGrid[1]);
+            CollectionAssert.AreEqual(expectedGrid[2], actualGrid[2]);
+            CollectionAssert.AreEqual(expectedGrid[3], actualGrid[3]);
+        }
+
+
 
         public int[][] getEmptyGrid()
         {

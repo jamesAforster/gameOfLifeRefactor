@@ -31,54 +31,127 @@ namespace gameOfLife
                 foreach (int i in row)
                 {
                     int count = 0;
+                        try
+                        {
+                            if (row[elementIndex + 1] == 1)
+                            {
+                                count += 1;
+                            }
+                        }
+                        catch
+                        {
 
-                    try
-                    {
-                        if (row[elementIndex - 1] == 1)
-                        {
-                            count += 1;
                         }
-                        if (row[elementIndex + 1] == 1)
+                        try
                         {
-                            count += 1;
+                            if (row[elementIndex - 1] == 1)
+                            {
+                                count += 1;
+                            }
                         }
-                        if (grid[rowIndex - 1][elementIndex] == 1)
+                        catch
                         {
-                            count += 1;
-                        }
-                        if (grid[rowIndex + 1][elementIndex] == 1)
-                        {
-                            count += 1;
-                        }
-                    }
-                    catch(IndexOutOfRangeException)
-                    {
-                        Console.Write("Out of range");
-                    }
 
-                    if (count < 2)
-                    {
-                        returnGrid[rowIndex][elementIndex] = 0;
-                    }
-                    if (count == 2)
-                    {
-                        returnGrid[rowIndex][elementIndex] = 1;
-                    }
+                        }
+                        try
+                        {
+                            if (grid[rowIndex + 1][elementIndex] == 1)
+                            {
+                                count += 1;
+                            }
+
+                        }
+                        catch
+                        {
+
+                        }
+                        try
+                        {
+                            if (grid[rowIndex - 1][elementIndex] == 1)
+                            {
+                                count += 1;
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        try
+                        {
+                            if (grid[rowIndex + 1][elementIndex + 1] == 1)
+                            {
+                                count += 1;
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        try
+                        {
+                            if (grid[rowIndex + 1][elementIndex - 1] == 1)
+                            {
+                                count += 1;
+                            }
+
+                        }
+                        catch
+                        {
+
+                        }
+                        try
+                        {
+                            if (grid[rowIndex - 1][elementIndex + 1] == 1)
+                            {
+                                count += 1;
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        try
+                        {
+                            if (grid[rowIndex - 1][elementIndex - 1] == 1)
+                            {
+                                count += 1;
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+
+                        if (i == 1)
+                        {
+                            if (count < 2)
+                            {
+                                returnGrid[rowIndex][elementIndex] = 0;
+                            }
+                            else if (count == 2 || count == 3)
+                            {
+                                returnGrid[rowIndex][elementIndex] = 1;
+                            }
+                            if (count > 3)
+                            {
+                                returnGrid[rowIndex][elementIndex] = 0;
+                            }
+                        }
+
+                    
+                        if ( i == 0 )
+                        {
+                            if (count == 3)
+                            {
+                                returnGrid[rowIndex][elementIndex] = 1;
+                            }
+                        }
                     elementIndex++;
                 }
                 rowIndex++;
             }
-            //foreach (int[] row in returnGrid)
-            //{
-            //    foreach (int i in row)
-            //    {
-            //        Console.WriteLine(i);
-            //    }
-            //}
-
             return returnGrid;
         }
-
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
